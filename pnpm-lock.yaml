@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@joyid/ethers':
+    specifier: 0.1.0-beta.0
+    version: 0.1.0-beta.0(ethers@5.7.0)
   '@joyid/evm':
     specifier: 0.1.0-beta.0
     version: 0.1.0-beta.0
@@ -963,6 +966,14 @@ packages:
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@joyid/ethers@0.1.0-beta.0(ethers@5.7.0):
+    resolution: {integrity: sha512-ZyIZwpUns1YwHP6rJVvC2QyRenbM4AJXuG89IS9UhqVPaB6xlKUCB7tnZKKsUc5GKKEcsOKEsY1m2fGCN7v79Q==}
+    peerDependencies:
+      ethers: ^5.0.0
+    dependencies:
+      ethers: 5.7.0
+    dev: false
 
   /@joyid/evm@0.1.0-beta.0:
     resolution: {integrity: sha512-ixjt1u5fbWrumcftQUoWaypsoBs9hRgqhqPBA3d0lvuympsf4CPcc/aea3odrDrUY/gpDcp1Rki1PONW2tRZhA==}

@@ -2,17 +2,18 @@ import { Navigate, useNavigate } from '@solidjs/router'
 import { Component, Show, createSignal } from 'solid-js'
 import toast from 'solid-toast'
 import { verifyMessage } from 'ethers/lib.esm/utils'
-import { signMessage } from '@joyid/evm'
 import { useAuthData } from '../hooks/localStorage'
+import { createSigner } from '../hooks/provider'
 
 export const SignMessage: Component = () => {
   const [challenge, setChallenge] = createSignal('Hello World')
   const [signature, setSignature] = createSignal('')
   const navi = useNavigate()
   const { authData } = useAuthData()
+  const signer = createSigner(authData.ethAddress)
 
   const onSignMessage = async () => {
-    const sig = await signMessage(challenge(), authData.ethAddress)
+    const sig = await signer.signMessage(challenge())
     setSignature(sig)
   }
 

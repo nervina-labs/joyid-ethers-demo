@@ -3,7 +3,7 @@ import './global.css'
 
 import { render } from 'solid-js/web'
 import { Router } from '@solidjs/router'
-import { initConfig } from '@joyid/evm'
+import { initConfig } from '@joyid/ethers'
 import App from './app'
 import { JOY_ID_URL, SEPOLIA_RPC_URL } from './env'
 import { SepoliaNetwork } from './hooks/provider'

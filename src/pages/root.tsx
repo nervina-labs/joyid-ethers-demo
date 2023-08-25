@@ -1,11 +1,9 @@
 import { Component, Show, createSignal } from 'solid-js'
 import { Navigate, useNavigate } from '@solidjs/router'
 import { useAuthData } from '../hooks/localStorage'
-import { connect } from '@joyid/evm'
-import { createProvider } from '../hooks/provider'
+import { connect } from '@joyid/ethers'
 
 export const Root: Component = () => {
-  const provider = createProvider()
   const [isLoading, setIsLoading] = createSignal(false)
   const navi = useNavigate()
   const { setAuthData, authData } = useAuthData()

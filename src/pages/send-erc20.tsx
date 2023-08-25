@@ -2,8 +2,7 @@
 import { Navigate, useNavigate } from '@solidjs/router'
 import toast from 'solid-toast'
 import { Component, Show, createSignal } from 'solid-js'
-import { signTransaction } from '@joyid/evm'
-import { createProvider } from '../hooks/provider'
+import { createProvider, createSigner } from '../hooks/provider'
 import { useAuthData } from '../hooks/localStorage'
 import { buildERC20Data, getERC20Balance } from '../erc20'
 import { useSendSuccessToast } from '../hooks/useSendSuccessToast'
@@ -24,6 +23,7 @@ export const SendERC20: Component = () => {
   const navi = useNavigate()
   const provider = createProvider()
   const { authData } = useAuthData()
+  const signer = createSigner(authData.ethAddress, provider)
   const [isLoading, setIsLoading] = createSignal(false)
   const sendSuccessToast = useSendSuccessToast()
   const onReset = () => {
@@ -64,16 +64,14 @@ export const SendERC20: Component = () => {
     }
     setIsLoading(true)
     try {
-      const tx = await signTransaction({
+      const tx = await signer.sendTransaction({
         to: contractAddress(),
         from: authData.ethAddress,
         value: '0',
         data: buildERC20Data(toAddress(), sendAmount),
       })
 
-      const txRes = await provider.sendTransaction(tx)
-
-      sendSuccessToast(txRes.hash)
+      sendSuccessToast(tx.hash)
     } catch (error) {
       const formattedError =
         error instanceof Error ? error.message : JSON.stringify(error)
